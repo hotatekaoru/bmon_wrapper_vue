@@ -38,7 +38,7 @@
   import BMonsterService from '../services/WrapBMonsterService'
 
   async function init() {
-    const res = await BMonsterService.lesson({studio: this.studio})
+    const res = await BMonsterService.lesson({studio: this.studio, cource: this.cource})
     this.lessons = res.data
   }
 
@@ -51,7 +51,8 @@
       }
     },
     watch: {
-      studio: init
+      studio: init,
+      cource: init
     },
     methods: {
       handleOnClickStudio: function(e, code) {
@@ -59,7 +60,7 @@
         this.$emit('clickStudio', code)
       }
     },
-    props: ['studio'],
+    props: ['studio', 'cource'],
     beforeMount: init
   }
 </script>

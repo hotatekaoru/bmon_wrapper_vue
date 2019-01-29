@@ -1,27 +1,35 @@
 <template>
   <div id="app" class="container">
     <aside class="sub-container">
-      <StudioList @clickStudio="handleOnClickStudio" title="スタジオ一覧" date=date />
+      <StudioList @clickStudio="handleOnClickStudio" title="スタジオ一覧" />
+      <CourseList @clickCourse="handleOnClickCourse" />
     </aside>
     <main class="main-container">
-      <StudioLesson :studio= "selectedStudio" v-if="selectedStudio"/>
+      <StudioLesson :studio= "selectedStudio" :cource= "selectedCourse" v-if="selectedStudio || selectedCourse"/>
     </main>
   </div>
 </template>
 <script>
   import store from './store';
   import StudioList from './components/StudioList';
+  import CourseList from './components/CourseList';
   import StudioLesson from './components/StudioLesson';
   export default {
     name: 'app',
     components: {
       StudioList,
+      CourseList,
       StudioLesson,
     },
     data: () => store.state,
     methods: {
       handleOnClickStudio: function(studio) {
+        this.selectedCourse = null
         this.selectedStudio = studio
+      },
+      handleOnClickCourse: function(course) {
+        this.selectedStudio = null
+        this.selectedCourse = course
       },
     }
   }
